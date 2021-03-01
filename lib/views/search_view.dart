@@ -112,22 +112,22 @@ class _SearchViewState extends State<SearchView> {
               SizedBox(
                 height: 30,
               ),
-              Container(
-                height: 1000,
-                child: GridView.builder(
-                    padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                    gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2),
-                    itemCount: varieties.length,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return VarietiesTile(
-                        imgUrls: varieties[index].imgUrl,
-                        varietie: varieties[index].varietieName,
-                      );
-                    }),
-              )
+              // Container(
+              //   height: 1000,
+              //   child: GridView.builder(
+              //       padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+              //       gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+              //           crossAxisCount: 2),
+              //       itemCount: varieties.length,
+              //       shrinkWrap: true,
+              //       scrollDirection: Axis.horizontal,
+              //       itemBuilder: (context, index) {
+              //         return VarietiesTile(
+              //           imgUrls: varieties[index].imgUrl,
+              //           varietie: varieties[index].varietieName,
+              //         );
+              //       }),
+              // )
             ],
           ),
         ),
