@@ -106,50 +106,50 @@ class _HomeState extends State<Home> {
                 ),
                 margin: EdgeInsets.symmetric(horizontal: 24),
                 padding: EdgeInsets.symmetric(horizontal: 24),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                        child: TextField(
-                      controller: searchController,
-                      decoration: InputDecoration(
-                          hintText: "search wallpapers",
-                          border: InputBorder.none),
-                    )),
-                    InkWell(
-                        onTap: () {
-                          if (searchController.text != "") {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SearchView(
-                                          search: searchController.text,
-                                        )));
-                          }
-                        },
-                        child: Container(child: Icon(Icons.search)))
-                  ],
-                ),
+                // child: Row(
+                //   children: <Widget>[
+                //     Expanded(
+                //         child: TextField(
+                //       controller: searchController,
+                //       decoration: InputDecoration(
+                //           hintText: "search wallpapers",
+                //           border: InputBorder.none),
+                //     )),
+                //     InkWell(
+                //         onTap: () {
+                //           if (searchController.text != "") {
+                //             Navigator.push(
+                //                 context,
+                //                 MaterialPageRoute(
+                //                     builder: (context) => SearchView(
+                //                           search: searchController.text,
+                //                         )));
+                //           }
+                //         },
+                //         child: Container(child: Icon(Icons.search)))
+                //   ],
+                // ),
               ),
-              SizedBox(
-                height: 16,
-              ),
-              SizedBox(
-                height: 16,
-              ),
+              // SizedBox(
+              //   height: 16,
+              // ),
+              // SizedBox(
+              //   height: 16,
+              // ),
               Container(
-                height: 80,
-                child: ListView.builder(
-                    padding: EdgeInsets.symmetric(horizontal: 24),
-                    itemCount: varieties.length,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      /// Create List Item tile
-                      return VarietiesTile(
-                        // imgUrls: varieties[index].imgUrl,
-                        varietie: varieties[index].varietieName, imgUrls: '',
-                      );
-                    }),
+                height: 10,
+                // child: ListView.builder(
+                //     padding: EdgeInsets.symmetric(horizontal: 24),
+                //     itemCount: varieties.length,
+                //     shrinkWrap: true,
+                //     scrollDirection: Axis.horizontal,
+                //     itemBuilder: (context, index) {
+                //       /// Create List Item tile
+                //       return VarietiesTile(
+                //         // imgUrls: varieties[index].imgUrl,
+                //         varietie: varieties[index].varietieName, imgUrls: '',
+                //       );
+                //     }),
               ),
               wallPaper(photos, context),
               SizedBox(
@@ -204,6 +204,22 @@ class _HomeState extends State<Home> {
               )
             ],
           ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        onPressed: () {
+          // if (searchController.text != "")
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SearchView(
+                        search: searchController.text,
+                      )));
+        },
+        child: Icon(
+          Icons.search,
+          color: Colors.black,
         ),
       ),
     );

@@ -1,4 +1,4 @@
 class VarietiesModel {
   String varietieName;
-  // String imgUrl;
+  String imgUrl;
 }

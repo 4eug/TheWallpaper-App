@@ -3,7 +3,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:the_wallpapers/data/data.dart';
+import 'package:the_wallpapers/home.dart';
+// import 'package:the_wallpapers/home.dart';
 import 'package:the_wallpapers/model/pictures_model.dart';
+import 'package:the_wallpapers/model/varieties_model.dart';
 import 'package:the_wallpapers/widgets/titlewidget.dart';
 
 class SearchView extends StatefulWidget {
@@ -18,6 +21,8 @@ class SearchView extends StatefulWidget {
 class _SearchViewState extends State<SearchView> {
   // ignore: deprecated_member_use
   List<PicturesModel> photos = new List();
+  // ignore: deprecated_member_use
+  List<VarietiesModel> varieties = new List();
   TextEditingController searchController = new TextEditingController();
 
   getSearchWallpaper(String searchQuery) async {
@@ -104,6 +109,25 @@ class _SearchViewState extends State<SearchView> {
                 height: 30,
               ),
               wallPaper(photos, context),
+              SizedBox(
+                height: 30,
+              ),
+              Container(
+                height: 1000,
+                child: GridView.builder(
+                    padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                    gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2),
+                    itemCount: varieties.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return VarietiesTile(
+                        imgUrls: varieties[index].imgUrl,
+                        varietie: varieties[index].varietieName,
+                      );
+                    }),
+              )
             ],
           ),
         ),
