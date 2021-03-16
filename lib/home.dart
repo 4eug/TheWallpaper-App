@@ -193,11 +193,16 @@ class _HomeState extends State<Home> {
                       fontSize: 12,
                     ),
                   ),
-                  Text(
-                    "4eug",
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 12,
+                  GestureDetector(
+                    onTap: () {
+                      _launchURL("https://github.com/4eug");
+                    },
+                    child: Text(
+                      "4eug",
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 12,
+                      ),
                     ),
                   )
                 ],
