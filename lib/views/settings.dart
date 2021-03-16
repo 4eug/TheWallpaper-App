@@ -48,7 +48,7 @@ class _SettingState extends State<Setting> {
           ListTile(
             title: Text("App Version"),
             subtitle: Text("${_version ?? "1.0.0"} "),
-          )
+          ),
         ],
       ),
     );

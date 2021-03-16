@@ -8,7 +8,7 @@ Widget wallPaper(List<PicturesModel> listPictures, BuildContext context) {
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 16),
     child: GridView.count(
-        crossAxisCount: 2,
+        crossAxisCount: 3,
         childAspectRatio: 0.6,
         physics: ClampingScrollPhysics(),
         shrinkWrap: true,

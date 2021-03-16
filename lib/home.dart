@@ -8,6 +8,7 @@ import 'package:the_wallpapers/model/pictures_model.dart';
 import 'package:the_wallpapers/model/varieties_model.dart';
 import 'package:the_wallpapers/views/search_view.dart';
 import 'package:the_wallpapers/views/settings.dart';
+// import 'package:the_wallpapers/views/settings.dart';
 import 'package:the_wallpapers/views/varirties_screen.dart';
 import 'package:the_wallpapers/widgets/titlewidget.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -25,6 +26,8 @@ class _HomeState extends State<Home> {
   // ignore: deprecated_member_use
 
   int noOfImageToLoad = 30;
+  bool isLoading = true;
+  final bool darkThemeEnabled = false;
 
   // ignore: deprecated_member_use
   List<PicturesModel> photos = new List();
@@ -130,6 +133,7 @@ class _HomeState extends State<Home> {
                 //   ],
                 // ),
               ),
+
               // SizedBox(
               //   height: 16,
               // ),
@@ -151,10 +155,12 @@ class _HomeState extends State<Home> {
                 //       );
                 //     }),
               ),
+
               wallPaper(photos, context),
               SizedBox(
                 height: 24,
               ),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -211,6 +217,19 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
+      // drawer: Drawer(
+      //   child: ListView(
+      //     children: [
+      //       ListTile(
+      //         title: Text("Dark Theme"),
+      //         trailing: Switch(
+      //           value: darkThemeEnabled,
+      //           onChanged: bloc.changeTheme,
+      //         ),
+      //       )
+      //     ],
+      //   ),
+      // ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
         onPressed: () {
@@ -230,6 +249,15 @@ class _HomeState extends State<Home> {
     );
   }
 }
+
+// class Bloc {
+//   // ignore: close_sinks
+//   final _themeController = StreamController<bool>();
+//   get changeTheme => _themeController.sink.add;
+//   get darkThemeEnabled => _themeController.stream;
+// }
+
+// final bloc = Bloc();
 
 class VarietiesTile extends StatelessWidget {
   final String imgUrls, varietie;
