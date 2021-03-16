@@ -6,9 +6,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:the_wallpapers/model/Global.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:wallpaper_manager/wallpaper_manager.dart';
 
 class ImageView extends StatefulWidget {
   final String imgPath;
@@ -21,6 +24,8 @@ class ImageView extends StatefulWidget {
 
 class _ImageViewState extends State<ImageView> {
   var filePath;
+
+  get dio => null;
 
   _launchURL(String url) async {
     if (await canLaunch(url)) {
@@ -59,15 +64,19 @@ class _ImageViewState extends State<ImageView> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 InkWell(
-                    onTap: () {
+                    onTap: () async {
                       if (kIsWeb) {
                         _launchURL(widget.imgPath);
-                        //js.context.callMethod('downloadUrl',[widget.imgPath]);
-                        //response = await dio.download(widget.imgPath, "./xx.html");
+                        var js;
+                        js.context.callMethod('downloadUrl', [widget.imgPath]);
+                        // ignore: unused_local_variable
+                        var response =
+                            await dio.download(widget.imgPath, "./xx.html");
+                        // displayModalBottomSheet(context);
                       } else {
                         _save();
                       }
-                      //Navigator.pop(context);
+                      // Navigator.pop(context);
                     },
                     child: Stack(
                       children: <Widget>[
@@ -165,4 +174,71 @@ class _ImageViewState extends State<ImageView> {
           .checkPermissionStatus(PermissionGroup.storage);
     }
   }
+}
+
+void displayModalBottomSheet(context) {
+  showModalBottomSheet(
+      isDismissible: true,
+      context: context,
+      builder: (BuildContext bc) {
+        return Container(
+          child: new Wrap(
+            children: <Widget>[
+              ListTile(
+                  leading: new Icon(Icons.lock),
+                  title: new Text('Lock Screen'),
+                  onTap: () {
+                    setWallpaperLockScreen();
+                    Navigator.of(context).pop();
+                  }),
+              ListTile(
+                leading: new Icon(Icons.home),
+                title: new Text('Home Screen'),
+                onTap: () {
+                  setWallpaperHomeScreen();
+                  Navigator.of(context).pop();
+                },
+              ),
+              ListTile(
+                leading: new Icon(Icons.done_all_rounded),
+                title: new Text('Home & Lock Both'),
+                onTap: () {
+                  setWallpaperBoth();
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        );
+      });
+}
+
+Future<void> setWallpaperHomeScreen() async {
+  String url = Global.photos[Global.index].src.large;
+  int location = WallpaperManager
+      .HOME_SCREEN; // or location = WallpaperManager.LOCK_SCREEN;
+  var file = await DefaultCacheManager().getSingleFile(url);
+  // ignore: unused_local_variable
+  final String result =
+      await WallpaperManager.setWallpaperFromFile(file.path, location);
+}
+
+Future<void> setWallpaperLockScreen() async {
+  String url = Global.photos[Global.index].src.large;
+  int location = WallpaperManager
+      .LOCK_SCREEN; // or location = WallpaperManager.LOCK_SCREEN;
+  var file = await DefaultCacheManager().getSingleFile(url);
+  // ignore: unused_local_variable
+  final String result =
+      await WallpaperManager.setWallpaperFromFile(file.path, location);
+}
+
+Future<void> setWallpaperBoth() async {
+  String url = Global.photos[Global.index].src.large;
+  int location = WallpaperManager
+      .BOTH_SCREENS; // or location = WallpaperManager.LOCK_SCREEN;
+  var file = await DefaultCacheManager().getSingleFile(url);
+  // ignore: unused_local_variable
+  final String result =
+      await WallpaperManager.setWallpaperFromFile(file.path, location);
 }
