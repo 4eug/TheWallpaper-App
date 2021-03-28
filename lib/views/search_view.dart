@@ -27,7 +27,7 @@ class _SearchViewState extends State<SearchView> {
 
   getSearchWallpaper(String searchQuery) async {
     await http.get(
-        "https://api.pexels.com/v1/search?query=$searchQuery&per_page=30&page=1",
+        "https://api.pexels.com/v1/search?query=$searchQuery&per_page=100&page=1",
         headers: {"Authorization": apiKEY}).then((value) {
       //print(value.body);
 

@@ -25,7 +25,7 @@ class _HomeState extends State<Home> {
   List<VarietiesModel> varieties = new List();
   // ignore: deprecated_member_use
 
-  int noOfImageToLoad = 30;
+  int noOfImageToLoad = 100;
   bool isLoading = true;
   final bool darkThemeEnabled = false;
 
@@ -67,7 +67,7 @@ class _HomeState extends State<Home> {
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-        noOfImageToLoad = noOfImageToLoad + 30;
+        noOfImageToLoad = noOfImageToLoad + 100;
         getTrendingWallpaper();
       }
     });

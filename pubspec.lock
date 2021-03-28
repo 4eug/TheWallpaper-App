@@ -85,13 +85,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.10"
-  esys_flutter_share:
-    dependency: "direct main"
-    description:
-      name: esys_flutter_share
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.2"
   fake_async:
     dependency: transitive
     description:
@@ -142,13 +135,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  google_nav_bar:
-    dependency: "direct main"
-    description:
-      name: google_nav_bar
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.0.2"
   http:
     dependency: "direct main"
     description:
@@ -447,7 +433,7 @@ packages:
       name: url_launcher_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.5+1"
+    version: "0.1.5+3"
   url_launcher_windows:
     dependency: transitive
     description:
@@ -476,6 +462,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.10"
+  wallpaperplugin:
+    dependency: "direct main"
+    description:
+      name: wallpaperplugin
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.2"
   win32:
     dependency: transitive
     description:

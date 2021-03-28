@@ -25,9 +25,7 @@ dependencies:
     sdk: flutter
   cached_network_image: ^2.0.0
   dio: ^3.0.9
-  esys_flutter_share: null
   flutter_cache_manager: ^2.1.2
-  google_nav_bar: ^4.0.2
   http: ^0.12.0+4
   image_gallery_saver: ^1.2.2
   package_info: ^0.4.3+2
@@ -37,6 +35,7 @@ dependencies:
   url_launcher: ^5.4.2
   url_launcher_web: ^0.1.1+1
   wallpaper_manager: ^1.0.10
+  wallpaperplugin: ^0.1.2
 
 dev_dependencies:
   flutter_test:

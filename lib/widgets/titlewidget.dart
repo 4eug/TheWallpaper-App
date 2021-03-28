@@ -23,7 +23,7 @@ Widget wallPaper(List<PicturesModel> listPictures, BuildContext context) {
                   context,
                   MaterialPageRoute(
                       builder: (context) => ImageView(
-                            imgPath: pictureModel.src.portrait,
+                            imgUrl: pictureModel.src.portrait,
                           )));
             },
             child: Hero(
