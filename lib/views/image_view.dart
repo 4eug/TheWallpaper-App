@@ -1,13 +1,10 @@
-import 'dart:io';
-import 'dart:typed_data';
-import 'dart:ui';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter/foundation.dart';
+import 'package:dio/dio.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:wallpaperplugin/wallpaperplugin.dart';
+import 'package:flutter/services.dart';
+import 'package:easy_permission_validator/easy_permission_validator.dart';
 
 class ImageView extends StatefulWidget {
   final String imgUrl;
@@ -19,68 +16,97 @@ class ImageView extends StatefulWidget {
 }
 
 class _ImageViewState extends State<ImageView> {
-  var filePath;
+  bool permission = false;
+  bool downloadImage = false;
+  String downPer = "0%";
+  final String nAvail = "Not Available";
 
-  get dio => null;
-
-  // _launchURL(String url) async {
-  //   if (await canLaunch(url)) {
-  //     await launch(url);
-  //   } else {
-  //     throw 'Could not launch $url';
-  //   }
-  // }
+  _permissionRequest() async {
+    final permissionValidator = EasyPermissionValidator(
+      context: context,
+      appName: 'TheWallpaper',
+    );
+    var result = await permissionValidator.storage();
+    if (result) {
+      setState(() {
+        permission = true;
+        setWallpaper();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          Hero(
-            tag: widget.imgUrl,
-            child: Container(
+      body: Stack(children: <Widget>[
+        Hero(
+          tag: widget.imgUrl,
+          child: Container(
               height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              child: kIsWeb
-                  ? Image.network(widget.imgUrl, fit: BoxFit.cover)
-                  : CachedNetworkImage(
-                      imageUrl: widget.imgUrl,
-                      placeholder: (context, url) => Container(
-                        color: Color(0xfff5f8fd),
-                      ),
-                      fit: BoxFit.cover,
-                    ),
+              child: Image.network(
+                widget.imgUrl,
+                fit: BoxFit.cover,
+              )),
+        ),
+        Positioned(
+          child: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
           ),
-          Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            alignment: Alignment.bottomCenter,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                InkWell(
-                    onTap: () {
-                      _save();
-                    },
-                    child: Stack(
-                      children: <Widget>[
-                        Container(
-                          width: MediaQuery.of(context).size.width / 2,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: Color(0xff1C1B1B).withOpacity(0.8),
-                            borderRadius: BorderRadius.circular(40),
-                          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Align(
+              alignment: Alignment.bottomRight,
+              child: downloadImage
+                  ? Container(
+                      margin: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.white60,
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Text(
+                          "Downloading.. $downPer",
+                          style: TextStyle(color: Colors.black),
                         ),
-                        Container(
+                      ),
+                    )
+                  : InkWell(
+                      onTap: () {
+                        if (permission == false) {
+                          print("Requesting Permission");
+                          _permissionRequest();
+                        } else {
+                          print("Permission Granted.");
+                          setWallpaper();
+                        }
+                      },
+                      child: Stack(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width / 2,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: Color(0xff1C1B1B).withOpacity(0.8),
+                              borderRadius: BorderRadius.circular(40),
+                            ),
+                          ),
+                          Container(
                             width: MediaQuery.of(context).size.width / 2,
                             height: 50,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
                                 border:
                                     Border.all(color: Colors.white24, width: 1),
-                                borderRadius: BorderRadius.circular(40),
+                                borderRadius: BorderRadius.circular(50),
                                 gradient: LinearGradient(
                                     colors: [
                                       Color(0x36FFFFFF),
@@ -88,75 +114,65 @@ class _ImageViewState extends State<ImageView> {
                                     ],
                                     begin: FractionalOffset.topLeft,
                                     end: FractionalOffset.bottomRight)),
-                            child: Column(
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
+                              children: [
                                 Text(
                                   "Set Wallpaper",
                                   style: TextStyle(
                                       color: Colors.white70,
                                       fontSize: 15,
                                       fontWeight: FontWeight.w500),
-                                ),
-                                SizedBox(
-                                  height: 1,
-                                ),
-                                // Text(
-                                //   kIsWeb
-                                //       ? "Image will open in new tab to download"
-                                //       : "Image will be saved in gallery",
-                                //   style: TextStyle(
-                                //       fontSize: 8, color: Colors.white70),
-                                // ),
+                                )
                               ],
-                            )),
-                      ],
+                            ),
+                          ),
+                        ],
+                      ),
                     )),
-                SizedBox(
-                  height: 16,
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text(
-                    "Cancel",
-                    style: TextStyle(
-                        color: Colors.blueGrey,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
-                SizedBox(
-                  height: 50,
-                )
-              ],
-            ),
-          )
-        ],
-      ),
+        ),
+      ]),
     );
   }
 
-  _save() async {
-    await _askPermission();
-    var response = await Dio()
-        .get(widget.imgUrl, options: Options(responseType: ResponseType.bytes));
-    final result =
-        await ImageGallerySaver.saveImage(Uint8List.fromList(response.data));
-    print(result);
-    Navigator.pop(context);
+  void setWallpaper() async {
+    final dir = await getExternalStorageDirectory();
+    print(dir);
+    Dio dio = new Dio();
+    dio.download(
+      widget.imgUrl,
+      "${dir.path}/thewallpaper.png",
+      onReceiveProgress: (received, total) {
+        if (total != -1) {
+          String downloadingPer =
+              ((received / total * 100).toStringAsFixed(0) + "%");
+          setState(() {
+            downPer = downloadingPer;
+          });
+        }
+        setState(() {
+          downloadImage = true;
+        });
+      },
+    ).whenComplete(() {
+      setState(() {
+        downloadImage = false;
+      });
+      initPlatformState("${dir.path}/thewallpaper.png");
+    });
   }
 
-  _askPermission() async {
-    if (Platform.isIOS) {
-      // ignore: unused_local_variable
-      Map<PermissionGroup, PermissionStatus> permissions =
-          await PermissionHandler()
-              .requestPermissions([PermissionGroup.photos]);
-    } else {
-      /* PermissionStatus permission = */ await PermissionHandler()
-          .checkPermissionStatus(PermissionGroup.storage);
+  Future<void> initPlatformState(String path) async {
+    // ignore: unused_local_variable
+    String wallpaperStatus = "Unexpected Result";
+    String _localFile = path;
+    try {
+      Wallpaperplugin.setWallpaperWithCrop(localFile: _localFile);
+      wallpaperStatus = "Wallpaper set";
+    } on PlatformException {
+      print("Platform exception");
+      wallpaperStatus = "Platform Error Occured";
     }
+    if (!mounted) return;
   }
 }
