@@ -1,8 +1,10 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart';
 import 'package:the_wallpapers/data/data.dart';
 import 'package:the_wallpapers/model/pictures_model.dart';
 import 'package:the_wallpapers/model/varieties_model.dart';
@@ -14,6 +16,7 @@ import 'package:the_wallpapers/widgets/titlewidget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'dart:convert';
+
 
 class Home extends StatefulWidget {
   @override
@@ -32,21 +35,31 @@ class _HomeState extends State<Home> {
   // ignore: deprecated_member_use
   List<PicturesModel> photos = new List();
 
-  getTrendingWallpaper() async {
-    await http.get(
-        "https://api.pexels.com/v1/curated?per_page=$noOfImageToLoad&page=1",
+  Future getTrendingWallpaper() async {
+    bool trustSelfSigned = true;
+    HttpClient httpClient = new HttpClient()
+    ..badCertificateCallback =
+        ((X509Certificate cert, String host, int port) => trustSelfSigned);
+    IOClient ioClient = new IOClient(httpClient);
+    try{
+      await ioClient.get(
+        "https://api.pexels.com/v1/curated?per_page=$noOfImageToLoad&page=1/",
         headers: {"Authorization": apiKEY}).then((value) {
-      //print(value.body);
+      print(value.body);
 
-      Map<String, dynamic> jsonData = jsonDecode(value.body);
-      jsonData["photos"].forEach((element) {
-        PicturesModel picturesModel = new PicturesModel();
-        picturesModel = PicturesModel.fromMap(element);
-        photos.add(picturesModel);
+        Map<String, dynamic> jsonData = jsonDecode(value.body);
+        jsonData["photos"].forEach((element) {
+          PicturesModel picturesModel = new PicturesModel();
+          picturesModel = PicturesModel.fromMap(element);
+          photos.add(picturesModel);
+        });
+
       });
-
-      setState(() {});
-    });
+    }catch(e){
+      print(e.toString());
+    }
+    isLoading = false;
+    setState(() {});
   }
 
   TextEditingController searchController = new TextEditingController();
@@ -156,7 +169,16 @@ class _HomeState extends State<Home> {
                 //     }),
               ),
 
-              wallPaper(photos, context),
+              // wallPaper(photos, context),
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    isLoading ? CircularProgressIndicator(): wallPaper(photos, context),
+
+                  ],
+                )
+              ),
               SizedBox(
                 height: 24,
               ),
