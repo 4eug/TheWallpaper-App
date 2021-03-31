@@ -13,10 +13,9 @@ import 'package:the_wallpapers/views/settings.dart';
 // import 'package:the_wallpapers/views/settings.dart';
 import 'package:the_wallpapers/views/varirties_screen.dart';
 import 'package:the_wallpapers/widgets/titlewidget.dart';
-import 'package:url_launcher/url_launcher.dart';
+// import 'package:url_launcher/url_launcher.dart';
 
 import 'dart:convert';
-
 
 class Home extends StatefulWidget {
   @override
@@ -38,14 +37,14 @@ class _HomeState extends State<Home> {
   Future getTrendingWallpaper() async {
     bool trustSelfSigned = true;
     HttpClient httpClient = new HttpClient()
-    ..badCertificateCallback =
-        ((X509Certificate cert, String host, int port) => trustSelfSigned);
+      ..badCertificateCallback =
+          ((X509Certificate cert, String host, int port) => trustSelfSigned);
     IOClient ioClient = new IOClient(httpClient);
-    try{
+    try {
       await ioClient.get(
-        "https://api.pexels.com/v1/curated?per_page=$noOfImageToLoad&page=1/",
-        headers: {"Authorization": apiKEY}).then((value) {
-      print(value.body);
+          "https://api.pexels.com/v1/curated?per_page=$noOfImageToLoad&page=1/",
+          headers: {"Authorization": apiKEY}).then((value) {
+        print(value.body);
 
         Map<String, dynamic> jsonData = jsonDecode(value.body);
         jsonData["photos"].forEach((element) {
@@ -53,9 +52,8 @@ class _HomeState extends State<Home> {
           picturesModel = PicturesModel.fromMap(element);
           photos.add(picturesModel);
         });
-
       });
-    }catch(e){
+    } catch (e) {
       print(e.toString());
     }
     isLoading = false;
@@ -84,14 +82,6 @@ class _HomeState extends State<Home> {
         getTrendingWallpaper();
       }
     });
-  }
-
-  _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
   }
 
   @override
@@ -146,112 +136,22 @@ class _HomeState extends State<Home> {
                 //   ],
                 // ),
               ),
-
-              // SizedBox(
-              //   height: 16,
-              // ),
-              // SizedBox(
-              //   height: 16,
-              // ),
-              Container(
-                height: 10,
-                // child: ListView.builder(
-                //     padding: EdgeInsets.symmetric(horizontal: 24),
-                //     itemCount: varieties.length,
-                //     shrinkWrap: true,
-                //     scrollDirection: Axis.horizontal,
-                //     itemBuilder: (context, index) {
-                //       /// Create List Item tile
-                //       return VarietiesTile(
-                //         // imgUrls: varieties[index].imgUrl,
-                //         varietie: varieties[index].varietieName, imgUrls: '',
-                //       );
-                //     }),
-              ),
-
-              // wallPaper(photos, context),
               Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    isLoading ? CircularProgressIndicator(): wallPaper(photos, context),
-
-                  ],
-                )
-              ),
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  isLoading
+                      ? CircularProgressIndicator()
+                      : wallPaper(photos, context),
+                ],
+              )),
               SizedBox(
                 height: 24,
               ),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    "Pictures Powered By ",
-                    style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: 12,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      _launchURL("https://www.pexels.com/");
-                    },
-                    child: Container(
-                        child: Text(
-                      "Pexels",
-                      style: TextStyle(
-                        color: Colors.green,
-                        fontSize: 12,
-                      ),
-                    )),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 4,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "By ",
-                    style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: 12,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      _launchURL("https://github.com/4eug");
-                    },
-                    child: Text(
-                      "4eug",
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontSize: 12,
-                      ),
-                    ),
-                  )
-                ],
-              )
             ],
           ),
         ),
       ),
-      // drawer: Drawer(
-      //   child: ListView(
-      //     children: [
-      //       ListTile(
-      //         title: Text("Dark Theme"),
-      //         trailing: Switch(
-      //           value: darkThemeEnabled,
-      //           onChanged: bloc.changeTheme,
-      //         ),
-      //       )
-      //     ],
-      //   ),
-      // ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
         onPressed: () {
@@ -271,15 +171,6 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
-// class Bloc {
-//   // ignore: close_sinks
-//   final _themeController = StreamController<bool>();
-//   get changeTheme => _themeController.sink.add;
-//   get darkThemeEnabled => _themeController.stream;
-// }
-
-// final bloc = Bloc();
 
 class VarietiesTile extends StatelessWidget {
   final String imgUrls, varietie;
