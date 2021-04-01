@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:package_info/package_info.dart';
-import 'package:the_wallpapers/const.dart';
+
+import 'package:the_wallpapers/widgets/listtilewidget.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:share/share.dart';
 
 class Setting extends StatefulWidget {
   @override
@@ -11,14 +12,14 @@ class Setting extends StatefulWidget {
 
 class _SettingState extends State<Setting> {
   String _packageName;
-  String _version;
+  String version;
 
   get url => null;
   @override
   void initState() {
     PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
       _packageName = packageInfo.packageName;
-      _version = packageInfo.version;
+      version = packageInfo.version;
     });
     super.initState();
   }
@@ -28,26 +29,43 @@ class _SettingState extends State<Setting> {
     return Scaffold(
       appBar: AppBar(
         title: Text("About"),
+        centerTitle: true,
+        elevation: 0.0,
+        actions: [
+          Container(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Icon(
+                Icons.add,
+                color: Colors.white,
+              ))
+        ],
       ),
       body: Column(
         children: <Widget>[
-          ListTile(
-            title: Text("Recommend"),
-            subtitle: Text("Share this app with your friends and family."),
-            onTap: () {
-              Share.share(
-                "$message\n${url + _packageName}",
-              );
-            },
-          ),
-          ListTile(
-            title: Text("Rate App"),
-            subtitle: Text("Leave a review on the Google Play Store."),
+          aboutListTile(
+            title: 'Rate this app',
+            subtitle: 'If you love it and you know it give it 5 stars',
+            icon: LineAwesomeIcons.star,
             onTap: () => launch(url + _packageName),
           ),
-          ListTile(
-            title: Text("App Version"),
-            subtitle: Text("${_version ?? "1.0.0"} "),
+          aboutListTile(
+            title: 'Share this app',
+            subtitle: 'Don\'t have all the fun alone',
+            icon: LineAwesomeIcons.share,
+            onTap: () => launch(""),
+          ),
+          aboutListTile(
+            title: 'Report a bug',
+            subtitle: 'A bug reported is a bug squashed',
+            icon: LineAwesomeIcons.bug,
+            onTap: () => launch(
+                'mailto:debraheug@gmail.com?subject=TheWallpaper%20Bug%20Report&body='),
+          ),
+          aboutListTile(
+            title: 'Developer Info',
+            subtitle: 'Find out who is behind this app',
+            icon: LineAwesomeIcons.code,
+            onTap: () => launch(""),
           ),
         ],
       ),

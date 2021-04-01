@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/io_client.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:the_wallpapers/data/data.dart';
 // import 'package:the_wallpapers/home.dart';
 // import 'package:the_wallpapers/home.dart';
@@ -112,7 +113,7 @@ class _SearchViewState extends State<SearchView> {
                                         )));
                           }
                         },
-                        child: Container(child: Icon(Icons.search)))
+                        child: Container(child: Icon(LineAwesomeIcons.search)))
                   ],
                 ),
               ),
@@ -123,7 +124,10 @@ class _SearchViewState extends State<SearchView> {
                   child: Column(
                 children: [
                   isLoading
-                      ? CircularProgressIndicator()
+                      ? CircularProgressIndicator(
+                          backgroundColor: Colors.black,
+                          valueColor: AlwaysStoppedAnimation(Colors.red),
+                        )
                       : wallPaper(photos, context),
                 ],
               )),

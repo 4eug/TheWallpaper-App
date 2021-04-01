@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/io_client.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:the_wallpapers/data/data.dart';
 import 'package:the_wallpapers/model/pictures_model.dart';
 import 'package:the_wallpapers/model/varieties_model.dart';
@@ -93,7 +94,7 @@ class _HomeState extends State<Home> {
         centerTitle: true,
         actions: [
           IconButton(
-              icon: Icon(Icons.info_outline),
+              icon: Icon(LineAwesomeIcons.info_circle),
               onPressed: () {
                 Navigator.push(context,
                     CupertinoPageRoute(builder: (context) => Setting()));
@@ -102,6 +103,7 @@ class _HomeState extends State<Home> {
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
+        physics: AlwaysScrollableScrollPhysics(),
         child: Container(
           child: Column(
             children: <Widget>[
@@ -141,7 +143,10 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   isLoading
-                      ? CircularProgressIndicator()
+                      ? LinearProgressIndicator(
+                          backgroundColor: Colors.black,
+                          valueColor: AlwaysStoppedAnimation(Colors.blue),
+                        )
                       : wallPaper(photos, context),
                 ],
               )),
@@ -164,7 +169,7 @@ class _HomeState extends State<Home> {
                       )));
         },
         child: Icon(
-          Icons.search,
+          LineAwesomeIcons.search,
           color: Colors.black,
         ),
       ),
