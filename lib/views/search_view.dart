@@ -58,7 +58,12 @@ class _SearchViewState extends State<SearchView> {
 
   @override
   void initState() {
-    getSearchWallpaper(widget.search);
+    try {
+      getSearchWallpaper(widget.search);
+    } catch (err) {
+      print(err);
+    }
+
     searchController.text = widget.search;
     super.initState();
   }

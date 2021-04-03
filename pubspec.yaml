@@ -23,13 +23,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  adv_fab: ^1.0.5
   cached_network_image: ^2.0.0
   dio: ^3.0.9
   easy_permission_validator: ^1.0.6
   esys_flutter_share: ^1.0.2
   flutter_cache_manager: ^2.1.2
-  flutter_speed_dial: ^3.0.5
   http: ^0.12.0+4
   image_gallery_saver: ^1.2.2
   line_awesome_flutter: ^1.0.1
