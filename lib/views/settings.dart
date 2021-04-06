@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:package_info/package_info.dart';
+import 'package:the_wallpapers/widgets/developers_info.dart';
 
 import 'package:the_wallpapers/widgets/listtilewidget.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -65,7 +66,11 @@ class _SettingState extends State<Setting> {
             title: 'Developer Info',
             subtitle: 'Find out who is behind this app',
             icon: LineAwesomeIcons.code,
-            onTap: () => launch(""),
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) => DevelopersInfo());
+            },
           ),
         ],
       ),

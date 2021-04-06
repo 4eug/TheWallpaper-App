@@ -11,3 +11,17 @@ const baseHeight = 640.0;
 double kScreenAwareSize(double size, BuildContext context) {
   return size * MediaQuery.of(context).size.height / baseHeight;
 }
+
+Color brightnessAwareColor(BuildContext context,
+    {Color lightColor, Color darkColor}) {
+  return themeBrightness(context) == Brightness.light ? lightColor : darkColor;
+}
+
+Brightness themeBrightness(BuildContext context) {
+  return Theme.of(context).brightness;
+}
+
+const titleTextStyle = TextStyle(
+  fontWeight: FontWeight.bold,
+  letterSpacing: 0.3,
+);

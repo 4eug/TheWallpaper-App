@@ -103,6 +103,18 @@ class _SearchViewState extends State<SearchView> {
                     Expanded(
                         child: TextField(
                       controller: searchController,
+                      keyboardType: TextInputType.text,
+                      textInputAction: TextInputAction.search,
+                      onEditingComplete: () {
+                        if (searchController.text != "") {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SearchView(
+                                        search: searchController.text,
+                                      )));
+                        }
+                      },
                       decoration: InputDecoration(
                           hintText: "search wallpapers",
                           border: InputBorder.none),
