@@ -3,18 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:the_wallpapers/const.dart';
 import 'package:the_wallpapers/widgets/adaptiveness.dart';
+import 'package:the_wallpapers/widgets/listtilewidget.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:toast/toast.dart';
 
 class DevelopersInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Map<IconData, String> infoSections = {
-      LineAwesomeIcons.github: 'github.com/4eug',
-      LineAwesomeIcons.envelope_square: 'debraheug@gmail.com',
-      LineAwesomeIcons.twitter: '@4eug_',
-    };
-
     void launchURL(String url) async {
       if (await canLaunch(url)) {
         await launch(url);
@@ -55,7 +50,7 @@ class DevelopersInfo extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage('assets/images/arthurdev_logo.png'),
+                        image: AssetImage('assets/images/4euglogo.png'),
                         fit: BoxFit.contain,
                       ),
                     ),
@@ -81,40 +76,27 @@ class DevelopersInfo extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        infoListTile(
-                          context,
-                          icon: infoSections.keys.elementAt(0),
-                          title: infoSections.values.elementAt(0),
-                          onTap: () => launchURL(
-                              'https:${infoSections.values.elementAt(0)}'),
+                        aboutListTile(
+                          title: 'Github',
+                          icon: LineAwesomeIcons.github,
+                          onTap: () => launchURL('https://github.com/4eug'),
                         ),
-                        infoListTile(
-                          context,
-                          icon: infoSections.keys.elementAt(1),
-                          title: infoSections.values.elementAt(1),
-                          onTap: () => launchURL(
-                              'https:${infoSections.values.elementAt(1)}'),
+                        aboutListTile(
+                          title: 'Twitter',
+                          icon: LineAwesomeIcons.twitter,
+                          onTap: () => launchURL('https://twitter.com/4eug_'),
                         ),
-                        infoListTile(
-                          context,
-                          icon: infoSections.keys.elementAt(2),
-                          title: infoSections.values.elementAt(2),
-                          onTap: () => launchURL(
-                              'https:${infoSections.values.elementAt(2)}'),
+                        aboutListTile(
+                          title: 'Instagram',
+                          icon: LineAwesomeIcons.instagram,
+                          onTap: () =>
+                              launchURL('https://www.instagram.com/_.4eug/'),
                         ),
-                        infoListTile(
-                          context,
-                          icon: infoSections.keys.elementAt(3),
-                          title: infoSections.values.elementAt(3),
+                        aboutListTile(
+                          title: 'LinkedIn',
+                          icon: LineAwesomeIcons.linkedin,
                           onTap: () => launchURL(
-                              'mailto:${infoSections.values.elementAt(3)}?subject=MobWear&body=Dear%20Delords,'),
-                        ),
-                        infoListTile(
-                          context,
-                          icon: infoSections.keys.elementAt(4),
-                          title: infoSections.values.elementAt(4),
-                          onTap: () => launchURL(
-                              'https:twitter.com/${infoSections.values.elementAt(4).split("@")[1]}'),
+                              'https://www.linkedin.com/in/eugene-debrah/'),
                         ),
                       ],
                     ),
