@@ -1,7 +1,8 @@
+import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:the_wallpapers/data/data.dart';
 // import 'package:the_wallpapers/home.dart';
@@ -28,23 +29,31 @@ class _SearchViewState extends State<SearchView> {
   bool isLoading = true;
   TextEditingController searchController = new TextEditingController();
 
-  getSearchWallpaper(String searchQuery) async {
-    await http.get(
-        "https://api.pexels.com/v1/search?query=$searchQuery&per_page=30&page=1",
-        headers: {"Authorization": apiKEY}).then((value) {
-      //print(value.body);
+  Future getSearchWallpaper(String searchQuery) async {
+    bool trustSelfSigned = true;
+    HttpClient httpClient = new HttpClient()
+      ..badCertificateCallback =
+          ((X509Certificate cert, String host, int port) => trustSelfSigned);
+    IOClient ioClient = new IOClient(httpClient);
+    try {
+      await ioClient.get(
+          "https://api.pexels.com/v1/search?query=$searchQuery&per_page=100&page=1",
+          headers: {"Authorization": apiKEY}).then((value) {
+        print(value.body);
 
-      Map<String, dynamic> jsonData = jsonDecode(value.body);
-      jsonData["photos"].forEach((element) {
-        //print(element);
-        PicturesModel picturesModel = new PicturesModel();
-        picturesModel = PicturesModel.fromMap(element);
-        photos.add(picturesModel);
-        //print(photosModel.toString()+ "  "+ photosModel.src.portrait);
+        Map<String, dynamic> jsonData = jsonDecode(value.body);
+        jsonData["photos"].forEach((element) {
+          PicturesModel picturesModel = new PicturesModel();
+          picturesModel = PicturesModel.fromMap(element);
+          photos.add(picturesModel);
+          //print(photosModel.toString()+ "  "+ photosModel.src.portrait);
+        });
       });
-
-      setState(() {});
-    });
+    } catch (e) {
+      print(e.toString());
+    }
+    isLoading = false;
+    setState(() {});
   }
 
   @override
