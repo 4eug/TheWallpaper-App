@@ -140,7 +140,7 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   isLoading
-                      ? LinearProgressIndicator(
+                      ? CircularProgressIndicator(
                           backgroundColor: Colors.black,
                           valueColor: AlwaysStoppedAnimation(Colors.blue),
                         )
