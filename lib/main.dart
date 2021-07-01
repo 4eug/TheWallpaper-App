@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/services.dart';
+import 'package:the_wallpapers/bloc/categoryWallpaperBloc.dart';
+import 'package:the_wallpapers/bloc/searchWallpaperBloc.dart';
+import 'package:the_wallpapers/bloc/wallpaperBloc.dart';
 import 'package:the_wallpapers/views/HomePage.dart';
 
 void main() {
@@ -15,16 +19,28 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'TheWallpaper ',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Colors.white,
+    return BlocProvider(
+      create: (context) => WallpaperBloc(),
+      child: BlocProvider(
+        create: (context) => SearchWallpaperBloc(),
+        child: BlocProvider(
+          create: (context) => CategoryWallpaperBloc(),
+          child: MaterialApp(
+            title: 'TheWallpaper',
+            theme: ThemeData(
+                brightness: Brightness.light,
+                cardColor: Colors.white38,
+                accentColor: Colors.black,
+                // ignore: deprecated_member_use
+                cursorColor: Colors.black,
+                dialogBackgroundColor: Colors.white,
+                primaryColor: Colors.white),
+            home: Homepage('TheWallpaper'),
+          ),
+        ),
       ),
-      home: Homepage('TheWallpaper '),
     );
   }
 }

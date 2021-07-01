@@ -1,10 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:the_wallpapers/bloc/wallpaperEvent.dart';
 import 'package:the_wallpapers/bloc/wallpaperState.dart';
 import 'package:the_wallpapers/model/wallpaper.dart';
+import 'package:the_wallpapers/views/const.dart';
 
 class WallpaperBloc extends Bloc<WallpaperEvent, WallpaperState> {
   @override
