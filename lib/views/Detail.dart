@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:the_wallpapers/model/wallpaper.dart';
 import 'package:wallpaperplugin/wallpaperplugin.dart';
 import 'package:flutter/services.dart';
 import 'package:easy_permission_validator/easy_permission_validator.dart';
 
-class ImageView extends StatefulWidget {
-  final String imgUrl;
-
-  ImageView({@required this.imgUrl});
+class Detail extends StatefulWidget {
+  final Wallpaper wallpaper;
+  Detail({@required this.wallpaper});
 
   @override
-  _ImageViewState createState() => _ImageViewState();
+  _DetailState createState() => _DetailState();
 }
 
-class _ImageViewState extends State<ImageView> {
+class _DetailState extends State<Detail> {
   bool permission = false;
   bool downloadImage = false;
   String downPer = "0%";
@@ -24,7 +24,7 @@ class _ImageViewState extends State<ImageView> {
   _permissionRequest() async {
     final permissionValidator = EasyPermissionValidator(
       context: context,
-      appName: 'TheWallpaper',
+      appName: 'Wallbay',
     );
     var result = await permissionValidator.storage();
     if (result) {
@@ -40,11 +40,11 @@ class _ImageViewState extends State<ImageView> {
     return Scaffold(
       body: Stack(children: <Widget>[
         Hero(
-          tag: widget.imgUrl,
+          tag: widget.wallpaper.portrait,
           child: Container(
               height: MediaQuery.of(context).size.height,
               child: Image.network(
-                widget.imgUrl,
+                widget.wallpaper.portrait,
                 fit: BoxFit.cover,
               )),
         ),
@@ -79,6 +79,12 @@ class _ImageViewState extends State<ImageView> {
                         ),
                       ),
                     )
+                  // GFButton(
+                  //     onPressed: () {},
+                  //     text: "Downloading... $downPer",
+                  //     shape: GFButtonShape.pills,
+                  //     color: Colors.white54,
+                  //   )
                   : InkWell(
                       onTap: () {
                         if (permission == false) {
@@ -89,47 +95,36 @@ class _ImageViewState extends State<ImageView> {
                           setWallpaper();
                         }
                       },
-                      child: Stack(
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width / 2,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: Color(0xff1C1B1B).withOpacity(0.8),
-                              borderRadius: BorderRadius.circular(40),
-                            ),
+                      child: Container(
+                        margin: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.white60,
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Text(
+                            "Set Wallpaper",
+                            style: TextStyle(color: Colors.black),
                           ),
-                          Container(
-                            width: MediaQuery.of(context).size.width / 2,
-                            height: 50,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                border:
-                                    Border.all(color: Colors.white24, width: 1),
-                                borderRadius: BorderRadius.circular(50),
-                                gradient: LinearGradient(
-                                    colors: [
-                                      Color(0x36FFFFFF),
-                                      Color(0x0FFFFFFF)
-                                    ],
-                                    begin: FractionalOffset.topLeft,
-                                    end: FractionalOffset.bottomRight)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Set Wallpaper",
-                                  style: TextStyle(
-                                      color: Colors.white70,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500),
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                    )),
+                    )
+              // GFButton(
+              //     onPressed: () {
+              //       if (permission == false) {
+              //         print("Requesting Permission");
+              //         _permissionRequest();
+              //       } else {
+              //         print("Permission Granted.");
+              //         setWallpaper();
+              //       }
+              //     },
+              //     text: "Set Wallpaper",
+              //     shape: GFButtonShape.pills,
+              //     color: Colors.white54,
+              //   ),
+              ),
         ),
       ]),
     );
@@ -140,8 +135,8 @@ class _ImageViewState extends State<ImageView> {
     print(dir);
     Dio dio = new Dio();
     dio.download(
-      widget.imgUrl,
-      "${dir.path}/thewallpaper.png",
+      widget.wallpaper.original,
+      "${dir.path}/wallbay.png",
       onReceiveProgress: (received, total) {
         if (total != -1) {
           String downloadingPer =
@@ -158,7 +153,7 @@ class _ImageViewState extends State<ImageView> {
       setState(() {
         downloadImage = false;
       });
-      initPlatformState("${dir.path}/thewallpaper.png");
+      initPlatformState("${dir.path}/wallbay.png");
     });
   }
 

@@ -5,5 +5,5 @@ final String editorChoiceEndPoint =
 final String perPageLimit = "&per_page=30";
 final String searchEndPoint = "https://api.pexels.com/v1/search?query=";
 final String message = "Check out this awesome wallpaper app:";
-final String url = "";
-final String gitHubUrl = "";
+final String url = "https://play.google.com/store/apps/details?id=";
+final String gitHubUrl = "https://github.com/tsvillain/Wallbay";
