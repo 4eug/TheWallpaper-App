@@ -11,10 +11,8 @@ import 'package:the_wallpapers/model/pictures_model.dart';
 import 'package:the_wallpapers/model/varieties_model.dart';
 import 'package:the_wallpapers/views/search_view.dart';
 import 'package:the_wallpapers/views/settings.dart';
-// import 'package:the_wallpapers/views/settings.dart';
 import 'package:the_wallpapers/views/varirties_screen.dart';
 import 'package:the_wallpapers/widgets/titlewidget.dart';
-// import 'package:url_launcher/url_launcher.dart';
 
 import 'dart:convert';
 

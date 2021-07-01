@@ -21,7 +21,7 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.5.0"
+    version: "2.6.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -92,13 +92,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.8"
-  esys_flutter_share:
-    dependency: "direct main"
-    description:
-      name: esys_flutter_share
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.2"
   fake_async:
     dependency: transitive
     description:
@@ -324,13 +317,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.13"
-  random_string:
-    dependency: "direct main"
-    description:
-      name: random_string
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.0"
   rxdart:
     dependency: transitive
     description:
@@ -356,7 +342,7 @@ packages:
       name: source_span
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.8.0"
+    version: "1.8.1"
   sqflite:
     dependency: transitive
     description:
@@ -412,7 +398,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.19"
+    version: "0.3.0"
   toast:
     dependency: "direct main"
     description:
@@ -456,7 +442,7 @@ packages:
     source: hosted
     version: "1.0.9"
   url_launcher_web:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: url_launcher_web
       url: "https://pub.dartlang.org"
@@ -483,13 +469,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  wallpaper_manager:
-    dependency: "direct main"
-    description:
-      name: wallpaper_manager
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.10"
   wallpaperplugin:
     dependency: "direct main"
     description:
@@ -519,5 +498,5 @@ packages:
     source: hosted
     version: "4.5.1"
 sdks:
-  dart: ">=2.12.0-259.9.beta <3.0.0"
+  dart: ">=2.12.0 <3.0.0"
   flutter: ">=1.22.2"
