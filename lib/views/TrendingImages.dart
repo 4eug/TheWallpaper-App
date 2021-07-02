@@ -6,12 +6,12 @@ import 'package:the_wallpapers/bloc/wallpaperState.dart';
 import 'package:the_wallpapers/model/wallpaper.dart';
 import 'package:the_wallpapers/views/Detail.dart';
 
-class EditorChoice extends StatefulWidget {
+class TrendingImages extends StatefulWidget {
   @override
-  _EditorChoiceState createState() => _EditorChoiceState();
+  _TrendingImagesState createState() => _TrendingImagesState();
 }
 
-class _EditorChoiceState extends State<EditorChoice>
+class _TrendingImagesState extends State<TrendingImages>
     with AutomaticKeepAliveClientMixin {
   int counter = 0;
   void openPage(Wallpaper wallpaper) {
@@ -56,7 +56,7 @@ class _EditorChoiceState extends State<EditorChoice>
             itemCount: state.getWallpaper.length,
             scrollDirection: Axis.vertical,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
+                crossAxisCount: 3,
                 mainAxisSpacing: 5,
                 crossAxisSpacing: 5,
                 childAspectRatio: (itemWidth / itemHeight)),
@@ -72,15 +72,14 @@ class _EditorChoiceState extends State<EditorChoice>
                     semanticContainer: true,
                     clipBehavior: Clip.antiAliasWithSaveLayer,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(20),
                     ),
                     child: Hero(
                       tag: state.getWallpaper[index].portrait,
                       child: FadeInImage.assetNetwork(
                         image: state.getWallpaper[index].portrait,
                         fit: BoxFit.cover,
-                        placeholder: "image/abstract.jpg",
-                        imageScale: 1,
+                        placeholder: "",
                       ),
                     ),
                   ),

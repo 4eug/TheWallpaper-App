@@ -18,13 +18,13 @@ class Detail extends StatefulWidget {
 class _DetailState extends State<Detail> {
   bool permission = false;
   bool downloadImage = false;
-  String downPer = "0%";
+  String downloadPer = "0%";
   final String nAvail = "Not Available";
 
   _permissionRequest() async {
     final permissionValidator = EasyPermissionValidator(
       context: context,
-      appName: 'Wallbay',
+      appName: 'TheWallpaper',
     );
     var result = await permissionValidator.storage();
     if (result) {
@@ -61,30 +61,32 @@ class _DetailState extends State<Detail> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(10.0),
           child: Align(
               alignment: Alignment.bottomRight,
               child: downloadImage
-                  ? Container(
-                      margin: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Colors.white60,
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(18.0),
-                        child: Text(
-                          "Downloading.. $downPer",
-                          style: TextStyle(color: Colors.black),
+                  ? Stack(children: [
+                      Positioned(
+                        bottom: 20,
+                        right: 140,
+                        child: Center(
+                          child: Container(
+                            margin: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(18.0),
+                              child: Text(
+                                "Downloading.. $downloadPer",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                    )
-                  // GFButton(
-                  //     onPressed: () {},
-                  //     text: "Downloading... $downPer",
-                  //     shape: GFButtonShape.pills,
-                  //     color: Colors.white54,
-                  //   )
+                    ])
                   : InkWell(
                       onTap: () {
                         if (permission == false) {
@@ -95,36 +97,27 @@ class _DetailState extends State<Detail> {
                           setWallpaper();
                         }
                       },
-                      child: Container(
-                        margin: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: Colors.white60,
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Text(
-                            "Set Wallpaper",
-                            style: TextStyle(color: Colors.black),
+                      child: Stack(children: [
+                        Positioned(
+                          bottom: 20,
+                          right: 140,
+                          child: Container(
+                            margin: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Text(
+                                "Set Wallpaper",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    )
-              // GFButton(
-              //     onPressed: () {
-              //       if (permission == false) {
-              //         print("Requesting Permission");
-              //         _permissionRequest();
-              //       } else {
-              //         print("Permission Granted.");
-              //         setWallpaper();
-              //       }
-              //     },
-              //     text: "Set Wallpaper",
-              //     shape: GFButtonShape.pills,
-              //     color: Colors.white54,
-              //   ),
-              ),
+                      ]),
+                    )),
         ),
       ]),
     );
@@ -136,13 +129,13 @@ class _DetailState extends State<Detail> {
     Dio dio = new Dio();
     dio.download(
       widget.wallpaper.original,
-      "${dir.path}/wallbay.png",
+      "${dir.path}/thewallpaper.png",
       onReceiveProgress: (received, total) {
         if (total != -1) {
           String downloadingPer =
               ((received / total * 100).toStringAsFixed(0) + "%");
           setState(() {
-            downPer = downloadingPer;
+            downloadPer = downloadingPer;
           });
         }
         setState(() {
@@ -153,7 +146,7 @@ class _DetailState extends State<Detail> {
       setState(() {
         downloadImage = false;
       });
-      initPlatformState("${dir.path}/wallbay.png");
+      initPlatformState("${dir.path}/thewallpaper.png");
     });
   }
 

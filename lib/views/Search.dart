@@ -102,7 +102,7 @@ class _SearchState extends State<Search> {
             itemCount: state.getSearchWallpaper.length,
             scrollDirection: Axis.vertical,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
+                crossAxisCount: 3,
                 mainAxisSpacing: 5,
                 crossAxisSpacing: 5,
                 childAspectRatio: (itemWidth / itemHeight)),
@@ -118,15 +118,14 @@ class _SearchState extends State<Search> {
                     semanticContainer: true,
                     clipBehavior: Clip.antiAliasWithSaveLayer,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(30),
                     ),
                     child: Hero(
                       tag: state.getSearchWallpaper[index].portrait,
                       child: FadeInImage.assetNetwork(
                         image: state.getSearchWallpaper[index].portrait,
                         fit: BoxFit.cover,
-                        placeholder: "image/abstract.jpg",
-                        imageScale: 1,
+                        placeholder: "",
                       ),
                     ),
                   ),
