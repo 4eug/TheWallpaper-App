@@ -53,7 +53,10 @@ class _DetailState extends State<Detail> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: Icon(
+                Icons.close,
+                color: Colors.orangeAccent,
+              ),
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -68,13 +71,13 @@ class _DetailState extends State<Detail> {
                   ? Stack(children: [
                       Positioned(
                         bottom: 20,
-                        right: 140,
+                        right: 120,
                         child: Center(
                           child: Container(
                             margin: EdgeInsets.all(10),
                             decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.orangeAccent,
+                              borderRadius: BorderRadius.circular(50),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(18.0),
@@ -100,11 +103,11 @@ class _DetailState extends State<Detail> {
                       child: Stack(children: [
                         Positioned(
                           bottom: 20,
-                          right: 140,
+                          right: 120,
                           child: Container(
                             margin: EdgeInsets.all(10),
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: Colors.orangeAccent,
                               borderRadius: BorderRadius.circular(50),
                             ),
                             child: Padding(
