@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:the_wallpapers/bloc/wallpaperEvent.dart';
 import 'package:the_wallpapers/bloc/wallpaperState.dart';
-import 'package:the_wallpapers/const.dart';
+import 'package:the_wallpapers/data/api.dart';
 import 'package:the_wallpapers/model/wallpaper.dart';
 
 class WallpaperBloc extends Bloc<WallpaperEvent, WallpaperState> {
@@ -18,7 +18,7 @@ class WallpaperBloc extends Bloc<WallpaperEvent, WallpaperState> {
       yield WallpaperIsLoading();
       try {
         var response = await http
-            .get(Uri.encodeFull(editorChoiceEndPoint + perPageLimit), headers: {
+            .get(Uri.encodeFull(curatedImages + perPageLimit), headers: {
           "Accept": "application/json",
           "Authorization": "$apiKey"
         });

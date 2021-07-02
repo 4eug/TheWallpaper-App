@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:package_info/package_info.dart';
+import 'package:share/share.dart';
+import 'package:the_wallpapers/const.dart';
 import 'package:the_wallpapers/widgets/developers_info.dart';
 import 'package:the_wallpapers/widgets/listtile.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -52,7 +54,11 @@ class _SettingState extends State<Setting> {
             title: 'Share this app',
             subtitle: 'Don\'t have all the fun alone',
             icon: LineAwesomeIcons.share,
-            onTap: () => launch(""),
+            onTap: () {
+              Share.share(
+                "$message\n${url + _packageName}",
+              );
+            },
           ),
           aboutListTile(
             title: 'Report a bug',

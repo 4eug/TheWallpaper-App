@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:the_wallpapers/bloc/wallpaperEvent.dart';
 import 'package:the_wallpapers/bloc/wallpaperState.dart';
-import 'package:the_wallpapers/const.dart';
+import 'package:the_wallpapers/data/api.dart';
 import 'package:the_wallpapers/model/wallpaper.dart';
 
 class SearchWallpaperBloc extends Bloc<WallpaperEvent, WallpaperState> {
@@ -19,7 +19,7 @@ class SearchWallpaperBloc extends Bloc<WallpaperEvent, WallpaperState> {
       yield SearchWallpaperIsLoading();
       try {
         var response = await http.get(
-            Uri.encodeFull(searchEndPoint + event.string + perPageLimit),
+            Uri.encodeFull(searchImages + event.string + perPageLimit),
             headers: {
               "Accept": "application/json",
               "Authorization": "$apiKey"

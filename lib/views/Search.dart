@@ -135,7 +135,7 @@ class _SearchState extends State<Search> {
           );
         } else if (state is SearchWallpaperIsNotLoaded) {
           return Center(
-            child: Text("Error Loading Wallpapers."),
+            child: Image.asset("assets/images/sww.png"),
           );
         } else {
           return Center(

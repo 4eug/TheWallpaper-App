@@ -89,7 +89,7 @@ class _TrendingImagesState extends State<TrendingImages>
           );
         } else if (state is WallpaperIsNotLoaded) {
           return Center(
-            child: Text("Error Loading Wallpapers."),
+            child: Image.asset("assets/images/sww.png"),
           );
         } else {
           return Text("WentWorng.");
