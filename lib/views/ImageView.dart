@@ -7,15 +7,15 @@ import 'package:wallpaperplugin/wallpaperplugin.dart';
 import 'package:flutter/services.dart';
 import 'package:easy_permission_validator/easy_permission_validator.dart';
 
-class Detail extends StatefulWidget {
+class ImageView extends StatefulWidget {
   final Wallpaper wallpaper;
-  Detail({@required this.wallpaper});
+  ImageView({@required this.wallpaper});
 
   @override
-  _DetailState createState() => _DetailState();
+  _ImageViewState createState() => _ImageViewState();
 }
 
-class _DetailState extends State<Detail> {
+class _ImageViewState extends State<ImageView> {
   bool permission = false;
   bool downloadImage = false;
   String downloadPer = "0%";
@@ -54,8 +54,7 @@ class _DetailState extends State<Detail> {
             elevation: 0,
             leading: IconButton(
               icon: Icon(
-                Icons.close,
-                color: Colors.orangeAccent,
+                Icons.arrow_back,
               ),
               onPressed: () {
                 Navigator.pop(context);
@@ -64,32 +63,24 @@ class _DetailState extends State<Detail> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(20.0),
           child: Align(
               alignment: Alignment.bottomRight,
               child: downloadImage
-                  ? Stack(children: [
-                      Positioned(
-                        bottom: 20,
-                        right: 120,
-                        child: Center(
-                          child: Container(
-                            margin: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: Colors.orangeAccent,
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(18.0),
-                              child: Text(
-                                "Downloading.. $downloadPer",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ),
-                          ),
+                  ? Container(
+                      margin: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.white60,
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Text(
+                          "Downloading.. $downloadPer",
+                          style: TextStyle(color: Colors.black),
                         ),
                       ),
-                    ])
+                    )
                   : InkWell(
                       onTap: () {
                         if (permission == false) {
@@ -100,26 +91,23 @@ class _DetailState extends State<Detail> {
                           setWallpaper();
                         }
                       },
-                      child: Stack(children: [
-                        Positioned(
-                          bottom: 20,
-                          right: 120,
-                          child: Container(
-                            margin: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: Colors.orangeAccent,
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Text(
-                                "Set Wallpaper",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ),
-                          ),
+                      child: Container(
+                        margin: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.white60,
+                          borderRadius: BorderRadius.circular(50),
                         ),
-                      ]),
+                        child: Padding(
+                            padding: const EdgeInsets.all(14.0),
+                            child: Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              children: [
+                                Text('Set Wallpaper'),
+                                SizedBox(width: 5),
+                                Icon(Icons.wallpaper),
+                              ],
+                            )),
+                      ),
                     )),
         ),
       ]),

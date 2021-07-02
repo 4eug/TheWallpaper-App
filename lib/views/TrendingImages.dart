@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:the_wallpapers/bloc/wallpaperBloc.dart';
 import 'package:the_wallpapers/bloc/wallpaperState.dart';
 import 'package:the_wallpapers/model/wallpaper.dart';
-import 'package:the_wallpapers/views/Detail.dart';
+import 'package:the_wallpapers/views/ImageView.dart';
 
 class TrendingImages extends StatefulWidget {
   @override
@@ -19,7 +19,7 @@ class _TrendingImagesState extends State<TrendingImages>
     Navigator.push(
       context,
       CupertinoPageRoute(
-        builder: (context) => Detail(
+        builder: (context) => ImageView(
           wallpaper: wallpaper,
         ),
       ),
@@ -31,7 +31,7 @@ class _TrendingImagesState extends State<TrendingImages>
     Navigator.push(
       context,
       CupertinoPageRoute(
-        builder: (context) => Detail(
+        builder: (context) => ImageView(
           wallpaper: wallpaper,
         ),
       ),
@@ -79,7 +79,8 @@ class _TrendingImagesState extends State<TrendingImages>
                       child: FadeInImage.assetNetwork(
                         image: state.getWallpaper[index].portrait,
                         fit: BoxFit.cover,
-                        placeholder: "",
+                        placeholder: "assets/images/Applogo.png",
+                        imageScale: 1,
                       ),
                     ),
                   ),

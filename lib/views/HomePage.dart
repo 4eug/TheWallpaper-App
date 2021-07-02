@@ -46,7 +46,7 @@ class _HomepageState extends State<Homepage> {
           )
         ],
       ),
-      body: getScreen(),
+      body: TrendingImages(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
         child: Icon(
@@ -61,8 +61,4 @@ class _HomepageState extends State<Homepage> {
       ),
     );
   }
-}
-
-getScreen() {
-  return TrendingImages();
 }

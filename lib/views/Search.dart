@@ -5,7 +5,7 @@ import 'package:the_wallpapers/bloc/searchWallpaperBloc.dart';
 import 'package:the_wallpapers/bloc/wallpaperEvent.dart';
 import 'package:the_wallpapers/bloc/wallpaperState.dart';
 import 'package:the_wallpapers/model/wallpaper.dart';
-import 'package:the_wallpapers/views/Detail.dart';
+import 'package:the_wallpapers/views/ImageView.dart';
 
 class Search extends StatefulWidget {
   @override
@@ -61,7 +61,7 @@ class _SearchState extends State<Search> {
     Navigator.push(
       context,
       CupertinoPageRoute(
-        builder: (context) => Detail(
+        builder: (context) => ImageView(
           wallpaper: wallpaper,
         ),
       ),
@@ -75,7 +75,7 @@ class _SearchState extends State<Search> {
     Navigator.push(
       context,
       CupertinoPageRoute(
-        builder: (context) => Detail(
+        builder: (context) => ImageView(
           wallpaper: wallpaper,
         ),
       ),
@@ -125,7 +125,8 @@ class _SearchState extends State<Search> {
                       child: FadeInImage.assetNetwork(
                         image: state.getSearchWallpaper[index].portrait,
                         fit: BoxFit.cover,
-                        placeholder: "",
+                        placeholder: "assets/images/Applogo.png",
+                        imageScale: 1,
                       ),
                     ),
                   ),
