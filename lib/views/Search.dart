@@ -38,6 +38,14 @@ class _SearchState extends State<Search> {
             _wallpaperBloc.add(SearchWallpaper(string: searchController.text));
           },
         ),
+        leading: IconButton(
+          icon: Icon(
+            arrow___left,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         actions: <Widget>[
           Padding(
             padding: const EdgeInsets.all(8.0),
