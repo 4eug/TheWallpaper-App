@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:the_wallpapers/bloc/searchWallpaperBloc.dart';
 import 'package:the_wallpapers/bloc/wallpaperEvent.dart';
 import 'package:the_wallpapers/bloc/wallpaperState.dart';
+import 'package:the_wallpapers/icons.dart';
 import 'package:the_wallpapers/model/wallpaper.dart';
 import 'package:the_wallpapers/views/ImageView.dart';
 
@@ -17,7 +18,7 @@ class _SearchState extends State<Search> {
   SearchWallpaperBloc _wallpaperBloc;
   TextEditingController searchController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
-  Icon actionIcon = Icon(Icons.search);
+  Icon actionIcon = Icon(settings);
   @override
   Widget build(BuildContext context) {
     _wallpaperBloc = BlocProvider.of<SearchWallpaperBloc>(context);
@@ -47,7 +48,7 @@ class _SearchState extends State<Search> {
                 _wallpaperBloc
                     .add(SearchWallpaper(string: searchController.text));
               },
-              icon: Icon(Icons.search),
+              icon: Icon(search),
             ),
           ),
         ],

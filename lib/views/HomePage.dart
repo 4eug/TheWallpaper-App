@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:the_wallpapers/bloc/wallpaperBloc.dart';
 import 'package:the_wallpapers/bloc/wallpaperEvent.dart';
+import 'package:the_wallpapers/icons.dart';
 import 'package:the_wallpapers/views/TrendingImages.dart';
 import 'package:the_wallpapers/views/Search.dart';
 import 'package:the_wallpapers/views/Setting.dart';
@@ -38,7 +39,7 @@ class _HomepageState extends State<Homepage> {
         centerTitle: true,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.settings),
+            icon: Icon(settings),
             onPressed: () {
               Navigator.push(
                   context, CupertinoPageRoute(builder: (context) => Setting()));
@@ -50,7 +51,7 @@ class _HomepageState extends State<Homepage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
         child: Icon(
-          Icons.search,
+          search,
           color: Colors.black,
         ),
         onPressed: () {

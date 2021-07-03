@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:the_wallpapers/icons.dart';
 import 'package:the_wallpapers/model/wallpaper.dart';
 import 'package:wallpaperplugin/wallpaperplugin.dart';
 import 'package:flutter/services.dart';
@@ -54,7 +55,7 @@ class _ImageViewState extends State<ImageView> {
             elevation: 0,
             leading: IconButton(
               icon: Icon(
-                Icons.arrow_back,
+                arrow___left,
               ),
               onPressed: () {
                 Navigator.pop(context);
@@ -104,7 +105,7 @@ class _ImageViewState extends State<ImageView> {
                               children: [
                                 Text('Set Wallpaper'),
                                 SizedBox(width: 5),
-                                Icon(Icons.wallpaper),
+                                Icon(image),
                               ],
                             )),
                       ),

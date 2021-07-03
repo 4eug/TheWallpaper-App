@@ -3,6 +3,7 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:package_info/package_info.dart';
 import 'package:share/share.dart';
 import 'package:the_wallpapers/const.dart';
+import 'package:the_wallpapers/icons.dart';
 import 'package:the_wallpapers/widgets/developers_info.dart';
 import 'package:the_wallpapers/widgets/listtile.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -30,18 +31,17 @@ class _SettingState extends State<Setting> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("About"),
-        centerTitle: true,
-        elevation: 0.0,
-        actions: [
-          Container(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Icon(
-                Icons.add,
-                color: Colors.white,
-              ))
-        ],
-      ),
+          title: Text("About"),
+          centerTitle: true,
+          elevation: 0,
+          leading: IconButton(
+            icon: Icon(
+              arrow___left,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          )),
       body: Column(
         children: <Widget>[
           aboutListTile(
