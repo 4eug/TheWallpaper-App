@@ -38,7 +38,7 @@ class _HomepageState extends State<Homepage> {
         centerTitle: true,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.info_outline),
+            icon: Icon(Icons.settings),
             onPressed: () {
               Navigator.push(
                   context, CupertinoPageRoute(builder: (context) => Setting()));
