@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:package_info/package_info.dart';
 import 'package:share/share.dart';
 import 'package:the_wallpapers/const.dart';
 import 'package:the_wallpapers/icons.dart';
+
 import 'package:the_wallpapers/widgets/developers_info.dart';
 import 'package:the_wallpapers/widgets/listtile.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -47,13 +47,13 @@ class _SettingState extends State<Setting> {
           aboutListTile(
             title: 'Rate this app',
             subtitle: 'If you love it and you know it give it 5 stars',
-            icon: LineAwesomeIcons.star,
+            icon: star,
             onTap: () => launch(url + _packageName),
           ),
           aboutListTile(
             title: 'Share this app',
             subtitle: 'Don\'t have all the fun alone',
-            icon: LineAwesomeIcons.share,
+            icon: arrow_curve,
             onTap: () {
               Share.share(
                 "$message\n${url + _packageName}",
@@ -63,14 +63,14 @@ class _SettingState extends State<Setting> {
           aboutListTile(
             title: 'Report a bug',
             subtitle: 'A bug reported is a bug squashed',
-            icon: LineAwesomeIcons.bug,
+            icon: bug,
             onTap: () => launch(
                 'mailto:debraheug@gmail.com?subject=TheWallpaper%20Bug%20Report&body='),
           ),
           aboutListTile(
             title: 'Developer Info',
             subtitle: 'Find out who is behind this app',
-            icon: LineAwesomeIcons.code,
+            icon: box_code,
             onTap: () {
               showDialog(
                   context: context,

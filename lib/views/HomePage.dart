@@ -21,9 +21,24 @@ class _HomepageState extends State<Homepage> {
 
   PageController controller = PageController();
 
+  var renew;
+
+  var refreshKey = GlobalKey<RefreshIndicatorState>();
+
   @override
   void initState() {
     super.initState();
+  }
+
+  Future<Null> refreshPage() async {
+    refreshKey.currentState?.show(atTop: false);
+    await Future.delayed(Duration(seconds: 2));
+
+    setState(() {
+      renew = TrendingImages();
+    });
+
+    return null;
   }
 
   @override
@@ -39,7 +54,7 @@ class _HomepageState extends State<Homepage> {
         centerTitle: true,
         actions: <Widget>[
           IconButton(
-            icon: Icon(settings),
+            icon: Icon(setting),
             onPressed: () {
               Navigator.push(
                   context, CupertinoPageRoute(builder: (context) => Setting()));
@@ -47,7 +62,8 @@ class _HomepageState extends State<Homepage> {
           )
         ],
       ),
-      body: TrendingImages(),
+      body: RefreshIndicator(
+          key: refreshKey, onRefresh: refreshPage, child: TrendingImages()),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
         child: Icon(

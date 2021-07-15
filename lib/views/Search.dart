@@ -18,7 +18,7 @@ class _SearchState extends State<Search> {
   SearchWallpaperBloc _wallpaperBloc;
   TextEditingController searchController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
-  Icon actionIcon = Icon(settings);
+  Icon actionIcon = Icon(setting);
   @override
   Widget build(BuildContext context) {
     _wallpaperBloc = BlocProvider.of<SearchWallpaperBloc>(context);
