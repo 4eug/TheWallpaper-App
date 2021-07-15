@@ -26,6 +26,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   data_connection_checker: ^0.3.4
   dio: ^3.0.3
+  double_back_to_close_app: ^2.0.1
   easy_permission_validator: ^1.0.6
   equatable: ^1.1.1
   flutter_bloc: ^4.0.0

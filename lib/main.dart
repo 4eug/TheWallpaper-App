@@ -1,3 +1,4 @@
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/services.dart';
@@ -35,7 +36,12 @@ class MyApp extends StatelessWidget {
               cursorColor: Colors.black,
               dialogBackgroundColor: Colors.white,
               primaryColor: Colors.white),
-          home: Homepage('TheWallpaper'),
+          home: Scaffold(
+              body: DoubleBackToCloseApp(
+                  snackBar: SnackBar(
+                    content: Text('Tap back again to leave'),
+                  ),
+                  child: Homepage('TheWallpaper'))),
         ),
       ),
     );
