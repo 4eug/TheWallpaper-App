@@ -17,7 +17,8 @@ class _SettingState extends State<Setting> {
   String _packageName;
   String version;
 
-  get url => null;
+  get url =>
+      "https://play.google.com/store/apps/details?id=com.eugenedebrah.thewallpaper";
   @override
   void initState() {
     PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
