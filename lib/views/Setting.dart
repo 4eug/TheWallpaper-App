@@ -14,15 +14,12 @@ class Setting extends StatefulWidget {
 }
 
 class _SettingState extends State<Setting> {
-  String _packageName;
   String version;
 
-  get url =>
-      "https://play.google.com/store/apps/details?id=com.eugenedebrah.thewallpaper";
   @override
   void initState() {
     PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
-      _packageName = packageInfo.packageName;
+      // _packageName = packageInfo.packageName;
       version = packageInfo.version;
     });
     super.initState();
@@ -46,18 +43,20 @@ class _SettingState extends State<Setting> {
       body: Column(
         children: <Widget>[
           aboutListTile(
-            title: 'Rate this app',
-            subtitle: 'If you love it and you know it give it 5 stars',
-            icon: star,
-            onTap: () => launch(url + _packageName),
-          ),
+              title: 'Rate this app',
+              subtitle: 'If you love it and you know it give it 5 stars',
+              icon: star,
+              onTap: () {
+                launch(
+                    "https://play.google.com/store/apps/details?id=com.eugenedebrah.thewallpaper");
+              }),
           aboutListTile(
             title: 'Share this app',
             subtitle: 'Don\'t have all the fun alone',
             icon: arrow_curve,
             onTap: () {
               Share.share(
-                "$message\n${url + _packageName}",
+                "$message\n${"https://play.google.com/store/apps/details?id=com.eugenedebrah.thewallpaper"}",
               );
             },
           ),
