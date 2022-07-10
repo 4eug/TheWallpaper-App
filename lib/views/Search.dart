@@ -41,6 +41,7 @@ class _SearchState extends State<Search> {
         leading: IconButton(
           icon: Icon(
             arrow___left,
+            color: Colors.black,
           ),
           onPressed: () {
             Navigator.pop(context);
@@ -51,12 +52,16 @@ class _SearchState extends State<Search> {
             padding: const EdgeInsets.all(8.0),
             child: IconButton(
               alignment: Alignment.centerRight,
+              color: Colors.black,
               onPressed: () {
                 FocusScope.of(context).requestFocus(FocusNode());
                 _wallpaperBloc
                     .add(SearchWallpaper(string: searchController.text));
               },
-              icon: Icon(search),
+              icon: Icon(
+                search,
+                color: Colors.black,
+              ),
             ),
           ),
         ],
@@ -103,7 +108,7 @@ class _SearchState extends State<Search> {
           );
         } else if (state is SearchWallpaperIsLoading) {
           return Center(
-            child: CircularProgressIndicator(),
+            child: null,
           );
         } else if (state is SearchWallpaperIsLoaded) {
           return GridView.builder(
