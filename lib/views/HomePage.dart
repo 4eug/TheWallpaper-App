@@ -55,6 +55,7 @@ class _HomepageState extends State<Homepage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(setting),
+            color: Colors.black,
             onPressed: () {
               Navigator.push(
                   context, CupertinoPageRoute(builder: (context) => Setting()));
